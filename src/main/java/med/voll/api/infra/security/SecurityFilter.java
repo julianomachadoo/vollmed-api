@@ -31,6 +31,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             var usuario = repository.findByLogin(subject);
 
             var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+//            Avisa ao Spring que o usuário está autenticado
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
@@ -42,7 +43,6 @@ public class SecurityFilter extends OncePerRequestFilter {
         if (authorizationHeader != null) {
             return authorizationHeader.replace("Bearer ", "");
         }
-
         return null;
     }
 
